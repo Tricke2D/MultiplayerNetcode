@@ -1,0 +1,22 @@
+{
+  "name": "netcode-engine",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:server": "npm run dev --workspace=@netcode/server",
+    "dev:client": "npm run dev --workspace=@netcode/client",
+    "build": "npm run build --workspaces --if-present",
+    "build:shared": "npm run build --workspace=@netcode/shared",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2",
+    "nodemon": "^3.0.3"
+  }
+}
