@@ -177,44 +177,44 @@ Pengguna membuka browser (client) dan terhubung ke server Node.js via WebSocket.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                                  BROWSER                                   │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌──────────────────┐  │
-│  │   Canvas    │  │  Predictor  │  │  Reconciler │  │  Snapshot Buffer │  │
-│  │  Renderer   │◄─│    (Local)  │  │  (Replay)   │  │  (Interpolation) │  │
-│  └─────────────┘  └─────────────┘  └─────────────┘  └──────────────────┘  │
-│         ▲                ▲               ▲                  ▲            │
-│         └────────────────┼───────────────┼──────────────────┘            │
-│                          │               │                                │
-│  ┌──────────────────────────────────────────────────────────────────┐    │
-│  │                     Socket Client (WebSocket)                    │    │
-│  │  - sendInput()   - sendShoot()   - sendPong()   - onMessage()  │    │
-│  └──────────────────────────────────────────────────────────────────┘    │
+│                                  BROWSER                                    │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌──────────────────┐    │
+│  │   Canvas    │  │  Predictor  │  │  Reconciler │  │  Snapshot Buffer │    │
+│  │  Renderer   │◄─│    (Local)  │  │  (Replay)   │  │  (Interpolation) │    │  
+│  └─────────────┘  └─────────────┘  └─────────────┘  └──────────────────┘    │
+│         ▲                ▲               ▲                  ▲               │
+│         └────────────────┼───────────────┼──────────────────┘               │
+│                          │               │                                  │
+│  ┌──────────────────────────────────────────────────────────────────┐       │
+│  │                     Socket Client (WebSocket)                    │       │
+│  │  - sendInput()   - sendShoot()   - sendPong()   - onMessage()    │       │
+│  └──────────────────────────────────────────────────────────────────┘       │
 └─────────────────────────────────────────────────────────────────────────────┘
                                     │
                                     │ WebSocket (ws://localhost:8080)
                                     │
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                                   SERVER                                   │
-│  ┌────────────────────────────────────────────────────────────────────┐    │
-│  │                      WebSocket Gateway                            │    │
-│  │  - Connection handler   - Message parser   - Broadcast           │    │
-│  └────────────────────────────────────────────────────────────────────┘    │
+│                                   SERVER                                    │
+│  ┌────────────────────────────────────────────────────────────────────┐     │
+│  │                      WebSocket Gateway                             │     │
+│  │  - Connection handler   - Message parser   - Broadcast             │     │
+│  └────────────────────────────────────────────────────────────────────┘     │
 │                                    │                                        │
-│  ┌────────────────────────────────────────────────────────────────────┐    │
-│  │                        Game Loop (30Hz)                           │    │
-│  │  ┌──────────────┐  ┌──────────────┐  ┌─────────────────────────┐ │    │
-│  │  │  TickClock   │  │  InputBuffer │  │   PlayerSessionStore   │ │    │
-│  │  │  (Fixed DT)  │  │  (Per Player)│  │   (RTT Tracking)       │ │    │
-│  │  └──────────────┘  └──────────────┘  └─────────────────────────┘ │    │
-│  │  ┌──────────────┐  ┌──────────────┐  ┌─────────────────────────┐ │    │
-│  │  │  Physics     │  │  GameState   │  │   SnapshotHistory      │ │    │
-│  │  │  (RigidBody) │  │  (Entities)  │  │   (60 tick window)     │ │    │
-│  │  └──────────────┘  └──────────────┘  └─────────────────────────┘ │    │
-│  │  ┌──────────────────────────────────────────────────────────────┐ │    │
-│  │  │              Lag Compensation Service                        │ │    │
-│  │  │  - calculateRewindTicks()   - performRewoundHitTest()      │ │    │
-│  │  └──────────────────────────────────────────────────────────────┘ │    │
-│  └────────────────────────────────────────────────────────────────────┘    │
+│  ┌────────────────────────────────────────────────────────────────────┐     │
+│  │                        Game Loop (30Hz)                            │     │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌─────────────────────────┐   │     │
+│  │  │  TickClock   │  │  InputBuffer │  │   PlayerSessionStore    │   │     │ 
+│  │  │  (Fixed DT)  │  │  (Per Player)│  │   (RTT Tracking)        │   │     │
+│  │  └──────────────┘  └──────────────┘  └─────────────────────────┘   │     │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌─────────────────────────┐   │     │
+│  │  │  Physics     │  │  GameState   │  │   SnapshotHistory       │   │     │
+│  │  │  (RigidBody) │  │  (Entities)  │  │   (60 tick window)      │   │     │
+│  │  └──────────────┘  └──────────────┘  └─────────────────────────┘   │     │
+│  │  ┌──────────────────────────────────────────────────────────────┐  │     │
+│  │  │              Lag Compensation Service                        │  │     │
+│  │  │  - calculateRewindTicks()   - performRewoundHitTest()        │  │     │
+│  │  └──────────────────────────────────────────────────────────────┘  │     │
+│  └────────────────────────────────────────────────────────────────────┘     │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -234,23 +234,23 @@ Pengguna membuka browser (client) dan terhubung ke server Node.js via WebSocket.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│  Client                     │  Server                                      │
-│                              │                                              │
-│  1. Keydown                 │                                              │
-│  2. applyLocalInput()       │                                              │
-│  3. sendInput(tick, input) ─┼──► 4. recordInput(tick, input)              │
-│                              │  5. Game loop (every 33ms)                 │
-│                              │      ├─ getInputAtTick(tick)               │
-│                              │      ├─ applyMovementInput(entity, input)  │
-│                              │      ├─ integrateMotion(entity, dt)        │
-│                              │      ├─ markInputProcessed(tick)           │
-│                              │      └─ recordTick(history)                │
-│                              │  6. broadcastPersonalizedSnapshots()       │
-│  8. onMessage(snapshot) ◄───┼──┘                                          │
-│  9. reconcile()              │                                              │
-│      ├─ if diverged: snap   │                                              │
-│      └─ else: prune log     │                                              │
-│  10. renderFrame()          │                                              │
+│  Client                      │  Server                                       │
+│                              │                                               │
+│  1. Keydown                  │                                               │
+│  2. applyLocalInput()        │                                               │
+│  3. sendInput(tick, input)  ─┼──► 4. recordInput(tick, input)                │
+│                              │  5. Game loop (every 33ms)                    │
+│                              │      ├─ getInputAtTick(tick)                  │
+│                              │      ├─ applyMovementInput(entity, input)     │
+│                              │      ├─ integrateMotion(entity, dt)           │
+│                              │      ├─ markInputProcessed(tick)              │
+│                              │      └─ recordTick(history)                   │
+│                              │  6. broadcastPersonalizedSnapshots()          │
+│  8. onMessage(snapshot) ◄─── ┼──┘                                            │
+│  9. reconcile()              │                                               │
+│      ├─ if diverged: snap    │                                               │
+│      └─ else: prune log      │                                               │
+│  10. renderFrame()           │                                               │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -258,17 +258,17 @@ Pengguna membuka browser (client) dan terhubung ke server Node.js via WebSocket.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│  Client                     │  Server                                      │
-│                              │                                              │
-│  1. Mouse click             │                                              │
-│  2. sendShoot(origin, dir) ─┼──► 3. calculateRewindTicks(RTT, delay)     │
-│                              │  4. performRewoundHitTest(tick - rewind)   │
-│                              │      ├─ getSnapshotAtTick()                │
-│                              │      ├─ raycastAgainstAABB()              │
-│                              │      └─ return hitEntityId or null        │
-│                              │  5. sendHitConfirmed(targetId)             │
-│  7. onMessage(hit_confirmed)◄┼──┘                                          │
-│  8. console.log('Hit!')     │                                              │
+│  Client                      │  Server                                       │
+│                              │                                               │
+│  1. Mouse click              │                                               │
+│  2. sendShoot(origin, dir) ──┼──► 3. calculateRewindTicks(RTT, delay)        │
+│                              │  4. performRewoundHitTest(tick - rewind)      │
+│                              │      ├─ getSnapshotAtTick()                   │
+│                              │      ├─ raycastAgainstAABB()                  │
+│                              │      └─ return hitEntityId or null            │
+│                              │  5. sendHitConfirmed(targetId)                │
+│  7. onMessage(hit_confirmed)◄┼──┘                                            │
+│  8. console.log('Hit!')      │                                               │
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -671,7 +671,7 @@ docker build -f apps/server/Dockerfile -t netcode-server .
 
 ```bash
 # Clone fork
-git clone <your-fork-url>
+git clone https://github.com/Tricke2D/MultiplayerNetcode
 cd netcode-engine
 
 # Install dependencies
@@ -702,6 +702,5 @@ npm run test --workspace=@netcode/server
 ## 📄 License & Credits
 
 - **License:** MIT
-- **Author:** Dio Alif
-- **Repository:** C:\Users\dio.alif\WebstormProjects\Netcode
-- **Status:** Project selesai 100% (3 fase, 14 minggu)
+- **Author:** Muhamad Syukro Zakka
+- **Repository:** https://github.com/Tricke2D/MultiplayerNetcode
