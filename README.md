@@ -702,5 +702,5 @@ npm run test --workspace=@netcode/server
 ## 📄 License & Credits
 
 - **License:** MIT
-- **Author:** Muhamad Syukro Zakka
+- **Author:** Muhamad Syukron Zakka
 - **Repository:** https://github.com/Tricke2D/MultiplayerNetcode
